@@ -1,13 +1,11 @@
 include_recipe "database::mysql"
 
 user node[:jtalks][:jcommune][:user][:name] do
-  group node[:jtalks][:jcommune][:user][:group]
   action :create
 end
 
 directory "/home/#{node[:jtalks][:jcommune][:user][:name]}" do
   owner node[:jtalks][:jcommune][:user][:name]
-  group node[:jtalks][:jcommune][:user][:group]
   mode 00700
   action :create
 end
