@@ -14,5 +14,6 @@ suites:
   - name: all
     run_list:
     - recipe[python]
+    - recipe[mysql::server]
     - recipe[jtalks::cicd]
     - recipe[jtalks::jcommune]

@@ -6,3 +6,6 @@ default['mysql']['server_debian_password'] = 'root'
 default['jtalks']['jcommune']['db']['name'] = 'jcommune'
 default['jtalks']['jcommune']['db']['user'] = 'jcommune'
 default['jtalks']['jcommune']['db']['password'] = 'jcommune'
+
+default['jtalks']['jcommune']['user']['name'] = 'jcommune'
+default['jtalks']['jcommune']['user']['group'] = node['jtalks']['jcommune']['user']['name']
