@@ -11,8 +11,8 @@ platforms:
      - recipe[apt]
 
 suites:
-  - name: default
+  - name: all
     run_list:
     - recipe[python]
     - recipe[jtalks::cicd]
-    attributes:
+    - recipe[jtalks::jcommune]
