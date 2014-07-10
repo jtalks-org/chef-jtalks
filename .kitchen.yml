@@ -4,6 +4,7 @@ driver:
 
 provisioner:
   name: chef_solo
+  require_chef_omnibus: true
 
 platforms:
   - name: ubuntu-12.04
@@ -11,9 +12,13 @@ platforms:
      - recipe[apt]
 
 suites:
-  - name: all
+  - name: cicd
     run_list:
     - recipe[python]
-    - recipe[mysql::server]
     - recipe[jtalks::cicd]
+    - recipe[java]
+  - name: jcommune
+    run_list:
+    - recipe[ark]
+    - recipe[mysql::server]
     - recipe[jtalks::jcommune]

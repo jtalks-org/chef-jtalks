@@ -13,5 +13,11 @@ The process is described on [Test Kitchen site](http://kitchen.ci/docs/getting-s
 - Install [Vagrant](http://www.vagrantup.com/) & [VirtualBox](https://www.virtualbox.org/wiki/Downloads) for running
  virtual machines.
 - `gem install test-kitchen` - this installs a utility to easy startup an env with the cookbook and run tests if needed.
+- `gem install berkshelf` - utility for test kitchen to download dependant cookbooks
  If this fails, you probably didn't install Ruby correctly. Run `kitchen version` to check the gem was installed.
 - Run `kitchen converge` to startup a VM with the cookbooks and `kitchen verify` to run the integration tests.
+
+## Misc
+
+In order to speed up working with Test Kitchen, one can you [this advise](https://gist.github.com/fnichol/7551540)
+configuring an HTTP proxy.

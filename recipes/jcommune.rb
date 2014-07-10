@@ -1,6 +1,7 @@
-include_recipe "database::mysql"
+include_recipe 'database::mysql'
 
 user node[:jtalks][:jcommune][:user][:name] do
+  shell '/bin/bash'
   action :create
 end
 
@@ -8,6 +9,12 @@ directory "/home/#{node[:jtalks][:jcommune][:user][:name]}" do
   owner node[:jtalks][:jcommune][:user][:name]
   mode 00700
   action :create
+end
+
+tomcat node[:tomcat][:instances][:jcommune][:base] do
+  owner node[:jtalks][:jcommune][:user][:name]
+  port node[:tomcat][:instances][:jcommune][:port]
+  shutdown_port node[:tomcat][:instances][:jcommune][:shutdown_port]
 end
 
 root_connection_info = {
