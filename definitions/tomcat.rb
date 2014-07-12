@@ -8,10 +8,16 @@ define :tomcat, :owner => 'root', :owner_group => nil, :port => 8080, :shutdown_
     url node[:tomcat][:download_url]
     path params[:name]
     owner params[:owner]
-    mode 700
     action :put
   end
-
+  execute "chmod u+x startup.sh catalina.sh shutdown.sh" do
+    cwd "#{params[:name]}/#{result_folder_name}/bin"
+    user params[:owner]
+  end
+  execute "chmod 744 #{result_folder_name} tomcat" do
+    cwd params[:name]
+    user params[:owner]
+  end
   link "#{params[:name]}/tomcat" do
     to "#{params[:name]}/#{result_folder_name}"
     owner params[:owner]

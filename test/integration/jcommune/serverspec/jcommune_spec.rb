@@ -22,11 +22,18 @@ describe 'jtalks::jcommune' do
     tomcat_path = '/home/jcommune/apache-tomcat-8.0.9'
     expect(file(tomcat_path)).to be_directory
     expect(file(tomcat_path)).to be_owned_by 'jcommune'
-    # expect(file(tomcat_path)).to be_mode 700
+    expect(file(tomcat_path)).to be_mode 744
   end
 
   it 'creates symlinks to the personal tomcat' do
     expect(file('/home/jcommune/tomcat')).to be_linked_to '/home/jcommune/apache-tomcat-8.0.9'
     expect(file('/home/jcommune/tomcat')).to be_owned_by 'jcommune'
+  end
+
+  it 'sets x flag to .sh scripts in tomcat dir' do
+    tomcat_bin = '/home/jcommune/tomcat/bin'
+    expect(file("#{tomcat_bin}/startup.sh")).to be_mode 744
+    expect(file("#{tomcat_bin}/shutdown.sh")).to be_mode 744
+    expect(file("#{tomcat_bin}/catalina.sh")).to be_mode 744
   end
 end
