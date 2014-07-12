@@ -14,7 +14,7 @@ define :tomcat, :owner => 'root', :owner_group => nil, :port => 8080, :shutdown_
     cwd "#{params[:name]}/#{result_folder_name}/bin"
     user params[:owner]
   end
-  execute "chmod 744 #{result_folder_name} tomcat" do
+  execute "chmod 755 #{result_folder_name} tomcat" do
     cwd params[:name]
     user params[:owner]
   end

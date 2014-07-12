@@ -22,7 +22,7 @@ describe 'jtalks::jcommune' do
     tomcat_path = '/home/jcommune/apache-tomcat-8.0.9'
     expect(file(tomcat_path)).to be_directory
     expect(file(tomcat_path)).to be_owned_by 'jcommune'
-    expect(file(tomcat_path)).to be_mode 744
+    expect(file(tomcat_path)).to be_mode 755
   end
 
   it 'creates symlinks to the personal tomcat' do
