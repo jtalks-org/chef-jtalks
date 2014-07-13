@@ -3,11 +3,26 @@ include Serverspec::Helper::Exec
 include Serverspec::Helper::DetectOS
 
 describe 'jtalks::jcommune' do
-  it 'creates os jcommune user with home dir' do
-    expect(user('jcommune')).to exist
-    expect(user('jcommune')).to have_home_directory '/home/jcommune'
-    expect(user('jcommune')).to have_home_directory '/home/jcommune'
-    expect(file('/home/jcommune')).to be_mode 700
+  describe file('/home/jcommune/tomcat/conf/server.xml') do
+    its(:content) { should include "9000" }
+    its(:content) { should include "8000" }
+  end
+  describe user('jcommune') do
+    it { should exist }
+    it { should have_home_directory '/home/jcommune' }
+    it { should have_login_shell '/bin/bash' }
+  end
+  describe file('/home/jcommune/apache-tomcat-8.0.9') do
+    it { should be_directory }
+    it { should be_owned_by 'jcommune' }
+    it { should be_mode 755 }
+  end
+  describe file('/home/jcommune/tomcat') do
+    it { should be_linked_to '/home/jcommune/apache-tomcat-8.0.9' }
+    it { should be_owned_by 'jcommune' }
+  end
+  describe file('/home/jcommune') do
+    it {should be_mode 700}
   end
 
   it 'creates jcommune db user' do
@@ -16,18 +31,6 @@ describe 'jtalks::jcommune' do
 
   it 'creates jcommune db with permissions granted to jcommune user' do
     expect(command('mysqldump -ujcommune -pjcommune jcommune > /dev/null')).to return_exit_status(0)
-  end
-
-  it 'installs personal tomcat into user home dir' do
-    tomcat_path = '/home/jcommune/apache-tomcat-8.0.9'
-    expect(file(tomcat_path)).to be_directory
-    expect(file(tomcat_path)).to be_owned_by 'jcommune'
-    expect(file(tomcat_path)).to be_mode 755
-  end
-
-  it 'creates symlinks to the personal tomcat' do
-    expect(file('/home/jcommune/tomcat')).to be_linked_to '/home/jcommune/apache-tomcat-8.0.9'
-    expect(file('/home/jcommune/tomcat')).to be_owned_by 'jcommune'
   end
 
   it 'sets x flag to .sh scripts in tomcat dir' do

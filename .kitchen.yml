@@ -21,4 +21,5 @@ suites:
     run_list:
     - recipe[ark]
     - recipe[mysql::server]
+    - recipe[java]
     - recipe[jtalks::jcommune]

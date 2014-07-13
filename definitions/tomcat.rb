@@ -14,7 +14,7 @@ define :tomcat, :owner => 'root', :owner_group => nil, :port => 8080, :shutdown_
     cwd "#{params[:name]}/#{result_folder_name}/bin"
     user params[:owner]
   end
-  execute "chmod 755 #{result_folder_name} tomcat" do
+  execute "chmod 755 #{result_folder_name}" do
     cwd params[:name]
     user params[:owner]
   end
@@ -22,5 +22,18 @@ define :tomcat, :owner => 'root', :owner_group => nil, :port => 8080, :shutdown_
     to "#{params[:name]}/#{result_folder_name}"
     owner params[:owner]
     group params[:owner_group]
+  end
+  execute "chmod 755 tomcat" do
+    cwd params[:name]
+    user params[:owner]
+  end
+  template "#{params[:name]}/tomcat/conf/server.xml" do
+    source 'server.xml.erb'
+    mode 644
+    owner params[:owner]
+    group params[:owner_group]
+    variables({
+                  :port => params[:port],
+                  :shutdown_port => params[:shutdown_port]})
   end
 end

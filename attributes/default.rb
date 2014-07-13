@@ -19,5 +19,5 @@ default[:tomcat][:version] = "#{node[:tomcat][:major_version]}.#{node[:tomcat][:
 default[:tomcat][:download_url] = "http://apache-mirror.rbc.ru/pub/apache/tomcat/tomcat-#{node[:tomcat][:major_version]}/" +
     "v#{node[:tomcat][:version]}/bin/apache-tomcat-#{node[:tomcat][:version]}.zip"
 default[:tomcat][:instances][:jcommune][:base] = "/home/#{node[:jtalks][:jcommune][:user][:name]}"
-default[:tomcat][:instances][:jcommune][:port] = 8081
-default[:tomcat][:instances][:jcommune][:shutdown_port] = 8001
+default[:tomcat][:instances][:jcommune][:port] = 9000
+default[:tomcat][:instances][:jcommune][:shutdown_port] = 8000
