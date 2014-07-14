@@ -23,3 +23,7 @@ suites:
     - recipe[mysql::server]
     - recipe[java]
     - recipe[jtalks::jcommune]
+  - name: firewall
+    run_list:
+    - recipe[firewall]
+    - recipe[jtalks::firewall]
