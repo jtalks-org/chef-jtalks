@@ -34,3 +34,15 @@ suites:
     run_list:
     - recipe[nginx]
     - recipe[jtalks::nginx]
+  - name: system
+    run_list:
+    - recipe[python]
+    - recipe[java]
+    - recipe[ark]
+    - recipe[mysql::server]
+    - recipe[firewall]
+    - recipe[nginx]
+    - recipe[jtalks::cicd]
+    - recipe[jtalks::firewall]
+    - recipe[jtalks::jcommune]
+    - recipe[jtalks::nginx]
