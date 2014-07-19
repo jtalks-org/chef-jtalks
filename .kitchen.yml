@@ -27,3 +27,7 @@ suites:
     run_list:
     - recipe[firewall]
     - recipe[jtalks::firewall]
+  - name: nginx
+    run_list:
+    - recipe[nginx]
+    - recipe[jtalks::nginx]

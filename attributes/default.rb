@@ -21,3 +21,5 @@ default[:tomcat][:download_url] = "http://apache-mirror.rbc.ru/pub/apache/tomcat
 default[:tomcat][:instances][:jcommune][:base] = "/home/#{node[:jtalks][:jcommune][:user][:name]}"
 default[:tomcat][:instances][:jcommune][:port] = 9000
 default[:tomcat][:instances][:jcommune][:shutdown_port] = 8000
+
+default[:nginx][:forum_site] = 'jcommune'
