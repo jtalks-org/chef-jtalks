@@ -17,7 +17,7 @@ default[:jtalks][:jcommune][:db][:user] = node[:jtalks][:jcommune][:user][:name]
 default[:jtalks][:jcommune][:db][:password] = node[:jtalks][:jcommune][:user][:name]
 
 default[:tomcat][:major_version] = '8'
-default[:tomcat][:minor_version] = '0.9'
+default[:tomcat][:minor_version] = '0.12'
 default[:tomcat][:version] = "#{node[:tomcat][:major_version]}.#{node[:tomcat][:minor_version]}"
 default[:tomcat][:download_url] = "http://apache-mirror.rbc.ru/pub/apache/tomcat/tomcat-#{node[:tomcat][:major_version]}/" +
     "v#{node[:tomcat][:version]}/bin/apache-tomcat-#{node[:tomcat][:version]}.zip"
