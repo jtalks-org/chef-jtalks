@@ -19,5 +19,5 @@ The process is described on [Test Kitchen site](http://kitchen.ci/docs/getting-s
 
 ## Misc
 
-In order to speed up working with Test Kitchen, one can you [this advise](https://gist.github.com/fnichol/7551540)
-configuring an HTTP proxy.
+In order to speed up working with Test Kitchen, you can follow [this advise](https://gist.github.com/fnichol/7551540) to
+configure an HTTP proxy.
