@@ -12,17 +12,21 @@ describe 'jtalks::jcommune' do
     it { should have_home_directory '/home/jcommune' }
     it { should have_login_shell '/bin/bash' }
   end
-  describe file('/home/jcommune/apache-tomcat-8.0.9') do
+  describe file('/home/jcommune/apache-tomcat-8.0.12') do
     it { should be_directory }
     it { should be_owned_by 'jcommune' }
     it { should be_mode 755 }
   end
   describe file('/home/jcommune/tomcat') do
-    it { should be_linked_to '/home/jcommune/apache-tomcat-8.0.9' }
+    it { should be_linked_to '/home/jcommune/apache-tomcat-8.0.12' }
     it { should be_owned_by 'jcommune' }
   end
   describe file('/home/jcommune') do
     it {should be_mode 700}
+  end
+  describe file('/home/jcommune/.jtalks') do
+    it {should be_mode 700}
+    it {should be_owned_by 'jcommune'}
   end
   describe file('/home/jcommune/.jtalks/environments/chef') do
     it {should be_mode 700}

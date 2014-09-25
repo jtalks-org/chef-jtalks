@@ -6,7 +6,7 @@ server {
   error_log  /var/log/nginx/jcommune.error.log;
 
   location ~* ^/(jpg|jpeg|gif|png|ico|css|pdf|ppt|txt|bmp|rtf|js)/(.*)$ {
-    proxy_pass http://localhost:9000;
+    proxy_pass http://localhost:<%= @destination_port %>;
     proxy_set_header Host $http_host;
     proxy_set_header Remote-Addr $http_remote_addr;
     proxy_set_header X-Real-IP $remote_addr;
@@ -18,7 +18,7 @@ server {
   }
 
   location / {
-    proxy_pass http://localhost:9000;
+    proxy_pass http://localhost:<%= @destination_port %>;
     proxy_set_header Host $http_host;
     proxy_set_header Remote-Addr $http_remote_addr;
     proxy_set_header X-Real-IP $remote_addr;

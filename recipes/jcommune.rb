@@ -43,6 +43,13 @@ end
 
 jcommune_configs_dir = "#{node[:jtalks][:jcommune][:jtalks_configs_folder]}/environments/#{node[:jtalks][:env_name]}"
 
+directory node[:jtalks][:jcommune][:jtalks_configs_folder] do
+  owner owner
+  group owner
+  mode '00700'
+  action :create
+end
+
 directory jcommune_configs_dir do
   owner owner
   group owner
