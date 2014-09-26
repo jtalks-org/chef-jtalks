@@ -74,3 +74,11 @@ template "#{jcommune_configs_dir}/jcommune.xml" do
                 :plugin_folder => node[:jtalks][:jcommune][:plugin_folder],
                 :spring_profiles => node[:jtalks][:jcommune][:spring_profiles]})
 end
+
+template "#{node[:jtalks][:jcommune][:jtalks_configs_folder]}/environments/global-configuration.cfg" do
+  source 'jtalks/global-configuration.cfg.erb'
+  mode '0600'
+  owner owner
+  variables({:tomcat_location => node[:tomcat][:instances][:jcommune][:base],
+             :jtalks_folder => node[:jtalks][:jcommune][:jtalks_configs_folder]})
+end
