@@ -3,7 +3,6 @@ include_recipe 'database::mysql'
 owner = node[:jtalks][:jcommune][:user][:name]
 home_dir = "/home/#{owner}"
 
-
 user owner do
   shell '/bin/bash'
   action :create
@@ -58,6 +57,14 @@ directory jcommune_configs_dir do
   action :create
 end
 
+directory "#{node[:jtalks][:jcommune][:jtalks_configs_folder]}/plugins/chef" do
+  owner owner
+  group owner
+  recursive true
+  mode '00700'
+  action :create
+end
+
 template "#{jcommune_configs_dir}/jcommune.xml" do
   source 'jtalks/jcommune.xml.erb'
   mode '0600'
@@ -81,4 +88,11 @@ template "#{node[:jtalks][:jcommune][:jtalks_configs_folder]}/environments/globa
   owner owner
   variables({:tomcat_location => node[:tomcat][:instances][:jcommune][:base],
              :jtalks_folder => node[:jtalks][:jcommune][:jtalks_configs_folder]})
+end
+
+cookbook_file "#{node[:tomcat][:instances][:jcommune][:base]}/conf/jcommune.ehcache.xml" do
+  source 'jtalks/jcommune.ehcache.xml'
+  owner owner
+  group owner
+  mode "0644"
 end
