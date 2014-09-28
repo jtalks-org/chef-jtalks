@@ -35,3 +35,7 @@ node[:nginx][:site].each do |site_attribute_node|
   end
 
 end
+
+service 'nginx' do
+  action :restart
+end
