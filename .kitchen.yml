@@ -44,5 +44,5 @@ suites:
     - recipe[nginx]
     - recipe[jtalks::cicd]
     - recipe[jtalks::firewall]
-    - recipe[jtalks::jcommune]
+    - recipe[jtalks::webapps]
     - recipe[jtalks::nginx]

@@ -13,14 +13,25 @@ cookbook_file "#{node[:nginx][:default_root]}/index.html" do
   mode "0644"
 end
 
-template "#{node[:nginx][:dir]}/sites-available/#{node[:nginx][:forum_site]}" do
-  source 'nginx/jcommune.conf.erb'
-  owner node[:nginx][:user]
-  group node[:nginx][:group]
-  mode '0644'
-  variables({:destination_port => node[:tomcat][:instances][:jcommune][:port]})
-end
+node[:nginx][:site].each do |site_attribute_node|
+  site = site_attribute_node[1] #hash with values of attribute
 
-nginx_site node[:nginx][:forum_site] do
-  enabled = true
+  template "#{node[:nginx][:dir]}/sites-available/#{site[:name]}" do
+    source 'nginx/site.conf.erb'
+    owner node[:nginx][:user]
+    group node[:nginx][:group]
+    mode '0644'
+    destination_port = node[:tomcat][:instances][site[:name]][:port]
+    variables({
+                  :destination_port => destination_port,
+                  :name => site[:name],
+                  :host => site[:host],
+                  :context_path => site[:context_path]
+              })
+  end
+
+  nginx_site site[:name] do
+    enabled = true
+  end
+
 end
