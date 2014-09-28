@@ -33,7 +33,7 @@ default[:tomcat][:instances][:jcommune][:port] = 9000
 default[:tomcat][:instances][:jcommune][:shutdown_port] = 8000
 # nginx
 default[:nginx][:site][:jcommune][:name] = node[:jtalks][:jcommune][:user][:name]
-default[:nginx][:site][:jcommune][:host] = 'localhost'
+default[:nginx][:site][:jcommune][:host] = 'jcommune'
 default[:nginx][:site][:jcommune][:context_path] = '/'
 # mail
 default[:jtalks][:mail][:jcommune][:mailbox_username] = 'jtalks@inbox.ru'
@@ -58,7 +58,7 @@ default[:tomcat][:instances][:antarcticle][:port] = 9100
 default[:tomcat][:instances][:antarcticle][:shutdown_port] = 8100
 # nginx
 default[:nginx][:site][:antarcticle][:name] = node[:jtalks][:antarcticle][:user][:name]
-default[:nginx][:site][:antarcticle][:host] = 'antarcticle.localhost'
+default[:nginx][:site][:antarcticle][:host] = 'antarcticle'
 default[:nginx][:site][:antarcticle][:context_path] = '/'
 # mail
 default[:jtalks][:mail][:antarcticle][:mailbox_username] = 'jtalks@inbox.ru'
