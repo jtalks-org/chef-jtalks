@@ -20,12 +20,6 @@ suites:
     - recipe[python]
     - recipe[jtalks::cicd]
     - recipe[java]
-  - name: jcommune
-    run_list:
-    - recipe[ark]
-    - recipe[mysql::server]
-    - recipe[java]
-    - recipe[jtalks::jcommune]
   - name: firewall
     run_list:
     - recipe[firewall]
