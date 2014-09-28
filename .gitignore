@@ -3,3 +3,5 @@
 *.lock
 .idea/
 *.iml
+# during build process we download all the cookbooks into this folder:
+cookbooks-with-dependencies/
