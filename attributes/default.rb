@@ -66,3 +66,26 @@ default[:jtalks][:mail][:antarcticle][:mailbox_password] = 'javatalks'
 # jtalks configs
 default[:jtalks][:antarcticle][:jtalks_configs_folder] = "#{node[:jtalks][:antarcticle][:user][:home_dir]}/.jtalks"
 default[:jtalks][:antarcticle][:poulpe_url] = 'http://localhost:8200'
+
+# Poulpe
+# os
+default[:jtalks][:poulpe][:user][:name] = 'poulpe'
+default[:jtalks][:poulpe][:user][:home_dir] = "/home/#{node[:jtalks][:poulpe][:user][:name]}"
+# DB
+default[:jtalks][:poulpe][:db][:name] = node[:jtalks][:poulpe][:user][:name]
+default[:jtalks][:poulpe][:db][:url] = "jdbc:mysql://localhost/#{node[:jtalks][:poulpe][:db][:name]}?characterEncoding=UTF-8"
+default[:jtalks][:poulpe][:db][:user] = node[:jtalks][:poulpe][:user][:name]
+default[:jtalks][:poulpe][:db][:password] = node[:jtalks][:poulpe][:db][:name]
+# tomcat
+default[:tomcat][:instances][:poulpe][:base] = "#{node[:jtalks][:poulpe][:user][:home_dir]}/tomcat"
+default[:tomcat][:instances][:poulpe][:port] = 9200
+default[:tomcat][:instances][:poulpe][:shutdown_port] = 8200
+# nginx
+default[:nginx][:site][:poulpe][:name] = node[:jtalks][:poulpe][:user][:name]
+default[:nginx][:site][:poulpe][:host] = 'poulpe'
+default[:nginx][:site][:poulpe][:context_path] = '/'
+# mail
+default[:jtalks][:mail][:poulpe][:mailbox_username] = 'jtalks@inbox.ru'
+default[:jtalks][:mail][:poulpe][:mailbox_password] = 'javatalks'
+# jtalks configs
+default[:jtalks][:poulpe][:jtalks_configs_folder] = "#{node[:jtalks][:poulpe][:user][:home_dir]}/.jtalks"
