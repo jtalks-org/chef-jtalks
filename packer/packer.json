@@ -1,0 +1,25 @@
+{
+    "variables": {
+        "do_client_id": "0ac486eed8b92d9992f572cc7bb8a2ea", "do_api_key": "f87f377768520f20b041c56f5130e612",
+        "vm_name": "jtalks-db"
+    },
+    "builders": [
+        {
+            "type": "digitalocean",
+            "client_id": "{{do_client_id}}",
+            "api_key": "{{do_api_key}}",
+            "droplet_name": "{{vm_name}}",
+            "size": "512mb",
+            "image": "ubuntu-12-04-x64",
+            "region": "ams2"
+        }
+    ],
+    "provisioners": [
+        { "type": "file", "source": "./cookbooks-with-dependencies", "destination": "/tmp" },
+        {
+            "type": "chef-solo", "remote_cookbook_paths": ["/tmp/cookbooks-with-dependencies"],
+            "run_list": ["apt", "python", "java", "ark", "mysql::server", "firewall", "nginx",
+                "jtalks::cicd", "jtalks::firewall", "jtalks::webapps", "jtalks::nginx"]
+        }
+    ]
+}
