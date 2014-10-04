@@ -8,6 +8,7 @@
             "client_id": "{{user `do_client_id`}}",
             "api_key": "{{user `do_api_key`}}",
             "droplet_name": "{{user `vm_name`}}",
+            "snapshot_name": "{{user `vm_name`}}.{{isotime \"02-01-2006T15-04-05\"}}",
             "size": "512mb",
             "region": "ams2",
             "image": "ubuntu-12-04-x64"
@@ -17,7 +18,7 @@
         { "type": "file", "source": "./cookbooks-with-dependencies", "destination": "/tmp" },
         {
             "type": "chef-solo", "remote_cookbook_paths": ["/tmp/cookbooks-with-dependencies"],
-            "run_list": ["apt", "python", "mysql::client", "firewall"]
+            "run_list": ["apt", "python", "firewall", "mysql::server", "database::mysql", "jtalks::databases"]
         }
     ]
 }

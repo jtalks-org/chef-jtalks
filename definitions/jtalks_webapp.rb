@@ -20,26 +20,6 @@ define :jtalks_webapp do
     shutdown_port node[:tomcat][:instances][app_name][:shutdown_port]
   end
 
-  root_connection_info = {
-      :host     => 'localhost',
-      :username => 'root',
-      :password => node[:mysql][:server_root_password]
-  }
-
-  mysql_database node[:jtalks][app_name][:db][:name] do
-    connection root_connection_info
-    encoding 'utf8'
-    action :create
-  end
-
-  mysql_database_user node[:jtalks][app_name][:db][:name] do
-    connection root_connection_info
-    password node[:jtalks][app_name][:db][:password]
-    database_name node[:jtalks][app_name][:db][:name]
-    privileges [:all]
-    action [:create, :grant]
-  end
-
   app_configs_dir = "#{node[:jtalks][app_name][:jtalks_configs_folder]}/environments/#{node[:jtalks][:env_name]}"
 
   directory node[:jtalks][app_name][:jtalks_configs_folder] do
