@@ -32,7 +32,7 @@ suites:
     run_list:
     - recipe[ark]
     - recipe[jtalks::webapps]
-  - name: db
+  - name: databases
     run_list:
     - recipe[mysql::server]
     - recipe[database::mysql]

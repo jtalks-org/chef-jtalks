@@ -1,6 +1,5 @@
 require 'serverspec'
-include Serverspec::Helper::Exec
-include Serverspec::Helper::DetectOS
+set :backend, :exec
 
 describe 'jtalks::jcommune' do
   describe file('/home/jcommune/tomcat/conf/server.xml') do
@@ -35,7 +34,7 @@ describe 'jtalks::jcommune' do
   describe file('/home/jcommune/.jtalks/environments/chef/jcommune.xml') do
     it { should be_owned_by 'jcommune' }
     it { should be_mode 600 }
-    its(:content) { should include 'name="EH_CACHE_CONFIG" value="/home/jcommune/tomcat/conf/jcommune.ehcache.xml"' }
+    its(:content) { should include 'name="EH_CACHE_CONFIG" value="file:/home/jcommune/tomcat/conf/jcommune.ehcache.xml"' }
     its(:content) { should include 'name="JCOMMUNE_DB_USER" value="jcommune"' }
     its(:content) { should include 'name="JCOMMUNE_DB_PASSWORD" value="jcommune"' }
     its(:content) { should include 'value="jdbc:mysql://localhost/jcommune?characterEncoding=UTF-8"' }
@@ -43,14 +42,6 @@ describe 'jtalks::jcommune' do
     its(:content) { should include 'name="SMTP_PORT" value="25"' }
     its(:content) { should include 'name="JCOMMUNE_PLUGIN_FOLDER" value="/home/jcommune/.jtalks/plugins/chef"' }
     its(:content) { should include 'name="spring.profiles.active" value="performance"' }
-  end
-
-  it('creates jcommune db user') do
-    expect(command("mysql -ujcommune -pjcommune -e 'select 1 from dual;'")).to return_exit_status(0)
-  end
-
-  it('creates jcommune db with permissions granted to jcommune user') do
-    expect(command('mysqldump -ujcommune -pjcommune jcommune > /dev/null')).to return_exit_status(0)
   end
 
   it('sets x flag to .sh scripts in tomcat dir') do

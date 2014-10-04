@@ -1,6 +1,5 @@
 require 'serverspec'
-include Serverspec::Helper::Exec
-include Serverspec::Helper::DetectOS
+set :backend, :exec
 
 describe 'jtalks::cicd' do
   it 'installs jtalks-cicd package' do
