@@ -18,13 +18,15 @@ default[:tomcat][:download_url] = "http://apache-mirror.rbc.ru/pub/apache/tomcat
 default[:jtalks][:mail][:smtp_host] = 'smtp.mail.ru'
 default[:jtalks][:mail][:smtp_port] = 25
 
+default[:jtalks][:db][:host] = 'localhost'
+
 # jcommune
 # OS
 default[:jtalks][:jcommune][:user][:name] = 'jcommune'
 default[:jtalks][:jcommune][:user][:home_dir] = "/home/#{node[:jtalks][:jcommune][:user][:name]}"
 # DB
 default[:jtalks][:jcommune][:db][:name] = node[:jtalks][:jcommune][:user][:name]
-default[:jtalks][:jcommune][:db][:url] = "jdbc:mysql://localhost/#{node[:jtalks][:jcommune][:db][:name]}?characterEncoding=UTF-8"
+default[:jtalks][:jcommune][:db][:url] = "jdbc:mysql://#{node[:jtalks][:db][:host]}/#{node[:jtalks][:jcommune][:db][:name]}?characterEncoding=UTF-8"
 default[:jtalks][:jcommune][:db][:user] = node[:jtalks][:jcommune][:user][:name]
 default[:jtalks][:jcommune][:db][:password] = node[:jtalks][:jcommune][:user][:name]
 # tomcat
@@ -49,7 +51,7 @@ default[:jtalks][:antarcticle][:user][:name] = 'antarcticle'
 default[:jtalks][:antarcticle][:user][:home_dir] = "/home/#{node[:jtalks][:antarcticle][:user][:name]}"
 # DB
 default[:jtalks][:antarcticle][:db][:name] = node[:jtalks][:antarcticle][:user][:name]
-default[:jtalks][:antarcticle][:db][:url] = "jdbc:mysql://localhost/#{node[:jtalks][:antarcticle][:db][:name]}?characterEncoding=UTF-8"
+default[:jtalks][:antarcticle][:db][:url] = "jdbc:mysql://#{node[:jtalks][:db][:host]}/#{node[:jtalks][:antarcticle][:db][:name]}?characterEncoding=UTF-8"
 default[:jtalks][:antarcticle][:db][:user] = node[:jtalks][:antarcticle][:user][:name]
 default[:jtalks][:antarcticle][:db][:password] = node[:jtalks][:antarcticle][:db][:name]
 # tomcat
@@ -73,7 +75,7 @@ default[:jtalks][:poulpe][:user][:name] = 'poulpe'
 default[:jtalks][:poulpe][:user][:home_dir] = "/home/#{node[:jtalks][:poulpe][:user][:name]}"
 # DB
 default[:jtalks][:poulpe][:db][:name] = node[:jtalks][:poulpe][:user][:name]
-default[:jtalks][:poulpe][:db][:url] = "jdbc:mysql://localhost/#{node[:jtalks][:poulpe][:db][:name]}?characterEncoding=UTF-8"
+default[:jtalks][:poulpe][:db][:url] = "jdbc:mysql://#{node[:jtalks][:db][:host]}/#{node[:jtalks][:poulpe][:db][:name]}?characterEncoding=UTF-8"
 default[:jtalks][:poulpe][:db][:user] = node[:jtalks][:poulpe][:user][:name]
 default[:jtalks][:poulpe][:db][:password] = node[:jtalks][:poulpe][:db][:name]
 # tomcat

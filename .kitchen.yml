@@ -28,6 +28,15 @@ suites:
     run_list:
     - recipe[nginx]
     - recipe[jtalks::nginx]
+  - name: webapps
+    run_list:
+    - recipe[ark]
+    - recipe[jtalks::webapps]
+  - name: db
+    run_list:
+    - recipe[mysql::server]
+    - recipe[database::mysql]
+    - recipe[jtalks::databases]
   - name: system
     run_list:
     - recipe[python]

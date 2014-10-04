@@ -2,6 +2,8 @@ define :tomcat, :owner => 'root', :owner_group => nil, :port => 8080, :shutdown_
   if params[:owner_group] == nil
     params[:owner_group] = params[:user]
   end
+  catalina_sh = "#{params[:name]}/tomcat/bin/catalina.sh"
+  webapps = "#{params[:name]}/tomcat/webapps"
 
   result_folder_name = "apache-tomcat-#{node[:tomcat][:version]}"
   ark result_folder_name do
@@ -10,7 +12,7 @@ define :tomcat, :owner => 'root', :owner_group => nil, :port => 8080, :shutdown_
     owner params[:owner]
     action :put
   end
-  execute "chmod u+x startup.sh catalina.sh shutdown.sh" do
+  execute 'chmod u+x startup.sh catalina.sh shutdown.sh' do
     cwd "#{params[:name]}/#{result_folder_name}/bin"
     user params[:owner]
   end
@@ -35,5 +37,15 @@ define :tomcat, :owner => 'root', :owner_group => nil, :port => 8080, :shutdown_
     variables({
                   :port => params[:port],
                   :shutdown_port => params[:shutdown_port]})
+  end
+  execute 'tomcat should use faster random generator' do
+    command "echo 'CATALINA_OPTS=\"-Djava.security.egd=file:/dev/./urandom $CATALINA_OPTS\"' >> #{catalina_sh}"
+    not_if { File.readlines(catalina_sh).grep(/java.security.egd/).any? }
+  end
+  %w[examples docs ROOT host-manager manager].each do |folder|
+    directory "#{webapps}/#{folder}" do
+      recursive true
+      action :delete
+    end
   end
 end

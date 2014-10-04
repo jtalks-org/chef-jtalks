@@ -1,11 +1,9 @@
 #!/bin/sh
 rm cookbooks-with-dependencies -r
 berks vendor cookbooks-with-dependencies
-app=$1
-
-if [ "${app}" == "db" ];then
-  packer_file="packer/packer-db.json"
-else
-  packer_file="packer/packer-webapp.json"
+image_type=$1
+if [ "$#" -eq 2 ];then
+  only="-only $2"
 fi
-packer build -var-file=packer/packer-vars-${app}.json ${packer_file}
+
+packer build ${only} -var-file=packer/packer-vars-${image_type}.json packer/packer-${image_type}.json

@@ -1,6 +1,6 @@
 {
     "variables": {
-        "do_client_id": "", "do_api_key": "", "vm_name": ""
+        "do_client_id": "", "do_api_key": "", "vm_name": "jtalks-webapp"
     },
     "builders": [
         {
@@ -12,14 +12,28 @@
             "size": "512mb",
             "region": "ams2",
             "image": "ubuntu-12-04-x64"
+        },
+        {
+            "type": "virtualbox-iso",
+            "guest_os_type": "Ubuntu_64",
+            "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.5-server-amd64.iso",
+            "iso_checksum": "769474248a3897f4865817446f9a4a53",
+            "iso_checksum_type": "md5",
+            "ssh_username": "ubuntu",
+            "ssh_password": "ubuntu",
+            "ssh_wait_timeout": "60s",
+            "disk_size": "1000",
+            "headless": "true",
+
+            "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
         }
     ],
     "provisioners": [
         { "type": "file", "source": "./cookbooks-with-dependencies", "destination": "/tmp" },
         {
             "type": "chef-solo", "remote_cookbook_paths": ["/tmp/cookbooks-with-dependencies"],
-            "run_list": ["apt", "python", "java", "ark", "firewall", "nginx",
-                "jtalks::cicd", "jtalks::firewall", "jtalks::webapps", "jtalks::nginx"]
+            "run_list": ["apt", "python", "java", "ark", "nginx",
+                "jtalks::cicd", "jtalks::webapps", "jtalks::nginx"]
         }
     ]
 }
