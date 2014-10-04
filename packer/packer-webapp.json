@@ -1,6 +1,6 @@
 {
     "variables": {
-        "do_client_id": "", "do_api_key": "", "vm_name": "jtalks-db"
+        "do_client_id": "", "do_api_key": "", "vm_name": ""
     },
     "builders": [
         {
@@ -18,7 +18,8 @@
         { "type": "file", "source": "./cookbooks-with-dependencies", "destination": "/tmp" },
         {
             "type": "chef-solo", "remote_cookbook_paths": ["/tmp/cookbooks-with-dependencies"],
-            "run_list": ["apt", "firewall", "mysql::server", "database::mysql", "jtalks::databases"]
+            "run_list": ["apt", "python", "java", "ark", "firewall", "nginx",
+                "jtalks::cicd", "jtalks::firewall", "jtalks::webapps", "jtalks::nginx"]
         }
     ]
 }
