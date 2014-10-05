@@ -17,13 +17,15 @@ platforms:
 suites:
   - name: cicd
     run_list:
+    - recipe[build-essential]
     - recipe[python]
     - recipe[jtalks::cicd]
     - recipe[java]
-  - name: firewall
+  - name: databases
     run_list:
-    - recipe[firewall]
-    - recipe[jtalks::firewall]
+    - recipe[mysql::server]
+    - recipe[database::mysql]
+    - recipe[jtalks::databases]
   - name: nginx
     run_list:
     - recipe[nginx]
@@ -32,11 +34,6 @@ suites:
     run_list:
     - recipe[ark]
     - recipe[jtalks::webapps]
-  - name: databases
-    run_list:
-    - recipe[mysql::server]
-    - recipe[database::mysql]
-    - recipe[jtalks::databases]
   - name: system
     run_list:
     - recipe[python]

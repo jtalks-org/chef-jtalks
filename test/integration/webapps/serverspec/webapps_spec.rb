@@ -50,7 +50,7 @@ describe 'jtalks::jcommune' do
     expect(file("#{tomcat_bin}/shutdown.sh")).to be_mode 744
     expect(file("#{tomcat_bin}/catalina.sh")).to be_mode 744
   end
-  describe file('/home/jcommune/tomcat/bin/catalina.sh') do
+  describe file('/home/jcommune/tomcat/bin/setenv.sh') do
     its(:content) { should include 'java.security.egd' }
   end
 end

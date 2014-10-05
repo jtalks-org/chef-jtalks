@@ -2,7 +2,7 @@ define :tomcat, :owner => 'root', :owner_group => nil, :port => 8080, :shutdown_
   if params[:owner_group] == nil
     params[:owner_group] = params[:user]
   end
-  catalina_sh = "#{params[:name]}/tomcat/bin/catalina.sh"
+  setenv_sh = "#{params[:name]}/tomcat/bin/setenv.sh"
   webapps = "#{params[:name]}/tomcat/webapps"
 
   result_folder_name = "apache-tomcat-#{node[:tomcat][:version]}"
@@ -39,8 +39,8 @@ define :tomcat, :owner => 'root', :owner_group => nil, :port => 8080, :shutdown_
                   :shutdown_port => params[:shutdown_port]})
   end
   execute 'tomcat should use faster random generator' do
-    command "echo 'CATALINA_OPTS=\"-Djava.security.egd=file:/dev/./urandom $CATALINA_OPTS\"' >> #{catalina_sh}"
-    not_if { File.readlines(catalina_sh).grep(/java.security.egd/).any? }
+    command "echo 'CATALINA_OPTS=\"-Djava.security.egd=file:/dev/./urandom $CATALINA_OPTS\"' >> #{setenv_sh}"
+    not_if { File.exist?(setenv_sh) }
   end
   %w[examples docs ROOT host-manager manager].each do |folder|
     directory "#{webapps}/#{folder}" do
