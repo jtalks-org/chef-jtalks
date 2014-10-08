@@ -14,6 +14,9 @@ platforms:
     run_list:
      - recipe[apt]
 
+busser:
+  version: busser@0.6.2
+
 suites:
   - name: cicd
     run_list:

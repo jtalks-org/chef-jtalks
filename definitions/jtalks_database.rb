@@ -17,6 +17,7 @@ define :jtalks_database do
     password node[:jtalks][app_name][:db][:password]
     database_name node[:jtalks][app_name][:db][:name]
     privileges [:all]
+    host '%'
     action [:create, :grant]
   end
 end

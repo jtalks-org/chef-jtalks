@@ -1,6 +1,5 @@
 .kitchen/
 .kitchen.local.yml
-*.lock
 .idea/
 *.iml
 # during build process we download all the cookbooks into this folder:
