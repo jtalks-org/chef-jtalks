@@ -11,21 +11,37 @@
             "snapshot_name": "{{user `vm_name`}}.{{isotime \"02-01-2006T15-04-05\"}}",
             "size": "512mb",
             "region": "ams2",
-            "image": "ubuntu-12-04-x64"
+            "image": "ubuntu-14-04-x64"
         },
         {
             "type": "virtualbox-iso",
             "guest_os_type": "Ubuntu_64",
-            "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.5-server-amd64.iso",
-            "iso_checksum": "769474248a3897f4865817446f9a4a53",
+            "iso_urls": [
+                "http://releases.ubuntu.com/14.04/ubuntu-14.04-server-amd64.iso",
+                "http://nl.releases.ubuntu.com/14.04/ubuntu-14.04-server-amd64.iso"
+            ],
+            "iso_checksum": "01545fa976c8367b4f0d59169ac4866c",
             "iso_checksum_type": "md5",
-            "ssh_username": "ubuntu",
-            "ssh_password": "ubuntu",
-            "ssh_wait_timeout": "60s",
-            "disk_size": "1000",
-            "headless": "true",
-
-            "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+            "ssh_username": "jtalks",
+            "ssh_password": "jtalks",
+            "ssh_wait_timeout": "500s",
+            "disk_size": "1700",
+            "http_directory": "./packer",
+            "headless": false,
+            "boot_wait": "5s",
+            "boot_command": [
+                "<esc><esc><enter><wait>",
+                "/install/vmlinuz ",
+                "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
+                "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+                "hostname={{.Name}} ",
+                "fb=false debconf/frontend=noninteractive ",
+                "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+                "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+                "initrd=/install/initrd.gz -- <enter>"
+            ],
+            "shutdown_command": "echo 'jtalks' | sudo -S shutdown -P now",
+            "hard_drive_interface": "sata"
         }
     ],
     "provisioners": [

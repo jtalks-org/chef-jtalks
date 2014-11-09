@@ -11,14 +11,14 @@
             "snapshot_name": "{{user `vm_name`}}.{{isotime \"02-01-2006T15-04-05\"}}",
             "size": "512mb",
             "region": "ams2",
-            "image": "ubuntu-12-04-x64"
+            "image": "ubuntu-14-04-x64"
         }
     ],
     "provisioners": [
         { "type": "file", "source": "./cookbooks-with-dependencies", "destination": "/tmp" },
         {
             "type": "chef-solo", "remote_cookbook_paths": ["/tmp/cookbooks-with-dependencies"],
-            "run_list": ["apt", "firewall", "mysql::server", "database::mysql", "jtalks::databases"]
+            "run_list": ["apt", "mysql::server", "database::mysql", "jtalks::databases"]
         }
     ]
 }
