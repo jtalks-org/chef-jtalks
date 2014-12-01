@@ -39,7 +39,7 @@ describe 'jtalks::jcommune' do
     its(:content) { should include 'name="JCOMMUNE_DB_PASSWORD" value="jcommune"' }
     its(:content) { should include 'value="jdbc:mysql://localhost/jcommune?characterEncoding=UTF-8"' }
 
-    its(:content) { should include 'name="SMTP_PORT" value="25"' }
+    its(:content) { should include 'name="SMTP_PORT" value="465"' }
     its(:content) { should include 'name="JCOMMUNE_PLUGIN_FOLDER" value="/home/jcommune/.jtalks/plugins/chef"' }
     its(:content) { should include 'name="spring.profiles.active" value="performance"' }
   end
