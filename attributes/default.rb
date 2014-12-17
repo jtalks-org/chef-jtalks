@@ -16,7 +16,7 @@ default[:tomcat][:download_url] = "http://apache-mirror.rbc.ru/pub/apache/tomcat
     "v#{node[:tomcat][:version]}/bin/apache-tomcat-#{node[:tomcat][:version]}.zip"
 
 default[:jtalks][:mail][:smtp_host] = 'smtp.mail.ru'
-default[:jtalks][:mail][:smtp_port] = 25
+default[:jtalks][:mail][:smtp_port] = 465
 
 default[:jtalks][:db][:host] = 'localhost'
 
