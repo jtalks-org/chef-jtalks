@@ -1,6 +1,8 @@
 Chef JTalks Cookbook
 ----
 
+**CHEF PROVED TO BE AN UNRELYABLE TOOL AND WE'RE MOVING TO DOCKER, SEE OUR FIRST STEPS [HERE] (https://github.com/jtalks-org/jtalks-cicd).**
+
 Contains recipes to prepare environment for JTalks components deployment - should install required dependencies, MySQL,
 configure firewalls, etc. Go through [Tests Kichen](http://kitchen.ci/) guides in order to get a notion on how the
 development is going on.
